@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Calculator</title>
+    <script src="script.js" defer></script>
+
 </head>
 <body>
     
     <div class="wrapper">
         <section class="screen">
-            0
+            
         </section>
 
         <section class="calc-buttons">
             <div class="calc-buttons-row">
 
-                <button class="calc-button-double">
+                <button class="calc-button-double" id="clear">
                     C
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button" id="delete">
                     &larr;
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button operator" id="divide">
                     &divide;
                 </button>
 
@@ -32,19 +34,19 @@
 
             <div class="calc-buttons-row">
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     7
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     8
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     9
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button operator" id="multiply">
                     &times;
                 </button>
 
@@ -52,19 +54,19 @@
 
             <div class="calc-buttons-row">
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     4
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     5
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     6
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button operator" id="minus">
                     &minus;
                 </button>
 
@@ -72,19 +74,19 @@
 
             <div class="calc-buttons-row">
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     1
                 </button>
                 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     2
                 </button>
                 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     3
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button operator" id="plus">
                     &plus;
                 </button>
 
@@ -92,15 +94,15 @@
 
             <div class="calc-buttons-row">
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     0
                 </button>
 
-                <button class="calc-button">
+                <button class="calc-button-num">
                     .
                 </button>
 
-                <button class="calc-button-double">
+                <button class="calc-button-double" id="equals">
                     &equals;
                 </button>
 
@@ -112,6 +114,5 @@
 
 
 
-    <script src="script.js"></script>
 </body>
 </html>

@@ -49,6 +49,17 @@ body {
    flex-basis: 20%;
 }
 
+.calc-button-num {
+    height: 64px;
+    width: 64px;
+    border-radius: 12px;
+    border: rgba(35, 35, 35, 0.5);
+    box-shadow: rgba(35, 35, 35, 0.5);
+    background-color: #b6bbc0;
+    font-size: 25px;
+    flex-basis: 20%;
+ }
+
 .calc-button-double {
    height: 64px;
    width: 64px;
@@ -60,14 +71,22 @@ body {
    flex-basis: 46%;
 }
 
-.calc-button:last-child{
+.calc-button:last-child {
     background-color: rgb(255, 153, 0);
 }
 
-.calc-button:hover{
+.calc-button:hover {
     scale: 1.1;
 }
 
-.calc-button-double:hover{
+.calc-button:active {
+    scale: 1.15;
+}
+
+.calc-button-double:hover {
     scale: 1.1;
+}
+
+.calc-button-double:active {
+    scale: 1.15;
 }
