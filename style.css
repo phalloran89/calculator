@@ -27,9 +27,11 @@ body {
     padding: 5px;
     text-align: right;
     border-radius: 8px;
-    font-size: 60px;
+    font-size: 50px;
     overflow: auto;
     background-color: #c5cdd4;
+    height: 69px;
+    width: 384px;
 }
 
 .calc-buttons-row {
@@ -88,5 +90,13 @@ body {
 }
 
 .calc-button-double:active {
+    scale: 1.15;
+}
+
+.calc-button-num:hover {
+    scale: 1.1;
+}
+
+.calc-button-num:active {
     scale: 1.15;
 }

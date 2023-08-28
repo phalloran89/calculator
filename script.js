@@ -3,7 +3,7 @@ let firstNum = numberArray[0];
 let secondNum = numberArray[1];
 operatorArray = [];
 let operator = operatorArray[0];
-let displayValue = '10';
+let displayValue = '0';
 
 const screen = document.querySelector('.screen');
 screen.textContent = `${displayValue}`;
@@ -24,7 +24,13 @@ document.querySelector('#delete').addEventListener('click', () => {
 
 document.querySelectorAll('.calc-button-num').forEach(item => {
     item.addEventListener('click', (event) => {
-        console.log(`NUMBER ${event.target.textContent}`);
+        const clickedNumber = event.target.textContent;
+        if (displayValue === '0') {
+            displayValue = clickedNumber;
+        } else {
+            displayValue += clickedNumber;
+        }
+        screen.textContent = displayValue;
     });
 });
 
@@ -32,7 +38,7 @@ document.querySelectorAll('.calc-button-num').forEach(item => {
 
 document.querySelectorAll('.operator').forEach(item => {
     item.addEventListener('click', (event) => {
-        console.log(`OPERATOR ${event.target.textContent}`)
+        console.log(`${event.target.textContent}`)
     });
 });
 
