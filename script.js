@@ -9,7 +9,7 @@ function updateDisplay() {
         display.style = "font-size: 20px";
         display.textContent = displayValue;
     } else {
-       display.textContent = displayValue;
+        display.textContent = displayValue;
     }
 };
 
@@ -21,6 +21,9 @@ function buttonClick() {
         buttons[i].addEventListener('click', () => {
             if (buttons[i].classList.contains('operand')) {
                 inputOperand(buttons[i].value);
+                updateDisplay();
+            } else if (buttons[i].classList.contains('operator')) {
+                inputOperator(buttons[i].value);
                 updateDisplay();
             }
         });
@@ -35,4 +38,10 @@ function inputOperand(operand) {
     } else {
         displayValue += operand;
     }
+};
+
+function inputOperator(operator) {
+    numberArray.push(displayValue);
+    displayValue =  operator;
+    updateDisplay();
 }
