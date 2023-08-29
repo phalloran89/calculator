@@ -1,5 +1,6 @@
 let displayValue = '0';
 let numberArray = [];
+let operatorArray = [];
 
 const buttons = document.querySelectorAll('.calc-button');
 
@@ -19,11 +20,17 @@ updateDisplay();
 function buttonClick() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
+            if (displayValue === '-' || displayValue === '+' || displayValue === '*' || displayValue === '/') {
+                displayValue = '';
+            }
             if (buttons[i].classList.contains('operand')) {
                 inputOperand(buttons[i].value);
                 updateDisplay();
             } else if (buttons[i].classList.contains('operator')) {
                 inputOperator(buttons[i].value);
+                updateDisplay();
+            } else if (buttons[i].classList.contains('equals')) {
+                operation();
                 updateDisplay();
             }
         });
@@ -42,6 +49,42 @@ function inputOperand(operand) {
 
 function inputOperator(operator) {
     numberArray.push(displayValue);
+    operatorArray.push(operator);
     displayValue =  operator;
     updateDisplay();
+}
+
+function operation() {
+    numberArray.push(displayValue)
+    let currentTotal = 0;
+    if (numberArray.length > 1) {
+        for (let i = numberArray.length; i > 1; i--) {
+            switch(operatorArray[0]) {
+                case '-': currentTotal = Number(numberArray[0]) - Number(numberArray[1]);
+                    operatorArray.splice(0, 1);
+                    numberArray.splice(0, 2);
+                    numberArray.unshift(currentTotal);
+                    break;
+                case '+': currentTotal = Number(numberArray[0]) + Number(numberArray[1]);
+                    operatorArray.splice(0, 1);
+                    numberArray.splice(0, 2);
+                    numberArray.unshift(currentTotal);
+                    break;
+                case '*': currentTotal = Number(numberArray[0]) * Number(numberArray[1]);
+                    operatorArray.splice(0, 1);
+                    numberArray.splice(0, 2);
+                    numberArray.unshift(currentTotal);
+                    break;
+                case '/': currentTotal = Number(numberArray[0]) / Number(numberArray[1]);
+                    operatorArray.splice(0, 1);
+                    numberArray.splice(0, 2);
+                    numberArray.unshift(currentTotal);
+                    break;
+            }
+            displayValue = currentTotal;
+            console.log(numberArray);
+            console.log(operatorArray);
+            updateDisplay();
+        }
+    }
 }

@@ -28,10 +28,10 @@ body {
     text-align: right;
     border-radius: 8px;
     font-size: 50px;
-    overflow: auto;
     background-color: #c5cdd4;
     height: 69px;
     width: 384px;
+    word-wrap: break-word;
 }
 
 .calc-buttons-row {
