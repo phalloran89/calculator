@@ -1,49 +1,38 @@
-let numberArray = [];
-let firstNum = numberArray[0];
-let secondNum = numberArray[1];
-operatorArray = [];
-let operator = operatorArray[0];
 let displayValue = '0';
+let numberArray = [];
 
-const screen = document.querySelector('.screen');
-screen.textContent = `${displayValue}`;
+const buttons = document.querySelectorAll('.calc-button');
 
-// C button click resets displayValue to 0 and clears numberArray and operatorArray.
+function updateDisplay() {
+    const display = document.querySelector('.display');
+    if (displayValue.length > 13) {
+        display.style = "font-size: 20px";
+        display.textContent = displayValue;
+    } else {
+       display.textContent = displayValue;
+    }
+};
 
-document.querySelector('#clear').addEventListener('click', () => {
-    console.log('CLEAR');
-});
+updateDisplay();
 
-// delete button click removes last char from displayValue string.
 
-document.querySelector('#delete').addEventListener('click', () => {
-    console.log('DELETE');
-});
+function buttonClick() {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            if (buttons[i].classList.contains('operand')) {
+                inputOperand(buttons[i].value);
+                updateDisplay();
+            }
+        });
+    }
+};
 
-// number button click adds number to the end of displayValue string.
+buttonClick();
 
-document.querySelectorAll('.calc-button-num').forEach(item => {
-    item.addEventListener('click', (event) => {
-        const clickedNumber = event.target.textContent;
-        if (displayValue === '0') {
-            displayValue = clickedNumber;
-        } else {
-            displayValue += clickedNumber;
-        }
-        screen.textContent = displayValue;
-    });
-});
-
-// operator button click converts displayValue string to a number and pushes it to numberArray, also adds operator to operatorArray.
-
-document.querySelectorAll('.operator').forEach(item => {
-    item.addEventListener('click', (event) => {
-        console.log(`${event.target.textContent}`)
-    });
-});
-
-// equals button runs operate function, which takes first two numbers from numberArray and first operator from operatorArray and does the operation, removes numbers and operator from arrays, sets currentTotal which is pushed to the index[0] of numberArray. If there are no more numbers in numberArray or operators in operatorArray it displays this number as displayValue.
-
-document.querySelector('#equals').addEventListener('click', () => {
-    console.log(`EQUALS`);
-});
+function inputOperand(operand) {
+    if (displayValue === '0') {
+        displayValue = operand;
+    } else {
+        displayValue += operand;
+    }
+}
