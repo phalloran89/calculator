@@ -10,6 +10,7 @@ function updateDisplay() {
         display.style = "font-size: 20px";
         display.textContent = displayValue;
     } else {
+        display.style = "font-size: 50px";
         display.textContent = displayValue;
     }
 };
