@@ -86,5 +86,6 @@ function operation() {
             console.log(operatorArray);
             updateDisplay();
         }
-    }
+        numberArray.length = 0;
+    } 
 }
