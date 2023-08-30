@@ -101,27 +101,19 @@ function operation() {
             switch(operatorArray[0]) {
                 case '-': currentTotal = 
                 Number(numberArray[0]) - Number(numberArray[1]);
-                    operatorArray.splice(0, 1);
-                    numberArray.splice(0, 2);
-                    numberArray.unshift(currentTotal);
+                    postOperationArray();
                     break;
                 case '+': currentTotal = 
                 Number(numberArray[0]) + Number(numberArray[1]);
-                    operatorArray.splice(0, 1);
-                    numberArray.splice(0, 2);
-                    numberArray.unshift(currentTotal);
+                    postOperationArray();
                     break;
                 case '*': currentTotal = 
                 Number(numberArray[0]) * Number(numberArray[1]);
-                    operatorArray.splice(0, 1);
-                    numberArray.splice(0, 2);
-                    numberArray.unshift(currentTotal);
+                    postOperationArray();
                     break;
                 case '/': currentTotal = 
                 Number(numberArray[0]) / Number(numberArray[1]);
-                    operatorArray.splice(0, 1);
-                    numberArray.splice(0, 2);
-                    numberArray.unshift(currentTotal);
+                    postOperationArray();
                     break;
             }
             displayValue = currentTotal;
@@ -129,4 +121,10 @@ function operation() {
         }
         numberArray.length = 0;
     } 
+}
+
+function postOperationArray(currentTotal) {
+    operatorArray.splice(0, 1);
+    numberArray.splice(0, 2);
+    numberArray.unshift(currentTotal);
 }
