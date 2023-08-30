@@ -39,12 +39,23 @@ function buttonClick() {
             } else if (buttons[i].classList.contains('delete')) {
                 deleteLast();
                 updateDisplay();
+            } else if (buttons[i].classList.contains('negative')) {
+                switchNegative();
+                updateDisplay();
             }
         });
     }
 };
 
 buttonClick();
+
+function switchNegative() {
+    if (displayValue.charAt(0) === '-') {
+        displayValue = displayValue.substring(1);
+    } else {
+        displayValue = '-' + displayValue;
+    }
+}
 
 function deleteLast() {
     if (displayValue.length === 1) {
