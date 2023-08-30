@@ -32,12 +32,33 @@ function buttonClick() {
             } else if (buttons[i].classList.contains('equals')) {
                 operation();
                 updateDisplay();
+            } else if (buttons[i].classList.contains('clear')) {
+                clear();
+                updateDisplay();
+            } else if (buttons[i].classList.contains('delete')) {
+                deleteLast();
+                updateDisplay();
             }
         });
     }
 };
 
 buttonClick();
+
+function deleteLast() {
+    if (displayValue.length === 1) {
+        displayValue = '0';
+    } else {
+    displayValue = displayValue.substring(0, displayValue.length -1);
+    updateDisplay();
+    }
+}
+
+function clear() {
+    displayValue = '0';
+    numberArray.length = 0;
+    operatorArray.length = 0;
+}
 
 function inputOperand(operand) {
     if (displayValue === '0') {
