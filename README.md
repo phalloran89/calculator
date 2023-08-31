@@ -1,0 +1,1 @@
+A browser based calculator built for the Odin Project's Foundations Course.
