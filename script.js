@@ -63,7 +63,6 @@ function deleteLast() {
         displayValue = '';
     } else {
     displayValue = displayValue.substring(0, displayValue.length -1);
-    updateDisplay();
     }
 };
 
@@ -84,19 +83,19 @@ function inputOperand(operand) {
     } else {
         displayValue += operand;
     }
-    updateDisplay();
 };
 
 function inputOperator(operator) {
-    if (displayValue.length >= 1) {
+    if (displayValue === '-' || displayValue === '+' || 
+            displayValue === '*' || displayValue === '/') {
+                displayValue = operator;
+            } else if (displayValue.length >= 1 ) {
     numberArray.push(displayValue);
     displayValue = operator;
-    updateDisplay();
     } else {
         displayValue = operator;
     }
 };
-
 
 function operation() {
     numberArray.push(displayValue)
@@ -122,7 +121,6 @@ function operation() {
                     break;
             }
             displayValue = currentTotal;
-            updateDisplay();
         }
         numberArray.length = 0;
     } 
@@ -135,5 +133,3 @@ function postOperationArray(currentTotal) {
 };
 
 // prevent multiple operators being used sequentially.
-
-// when an operator is deleted, remove it from the operatorArray.
