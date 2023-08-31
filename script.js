@@ -18,14 +18,9 @@ function updateDisplay() {
 
 updateDisplay();
 
-
 function buttonClick() {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
-            if (displayValue === '-' || displayValue === '+' || 
-            displayValue === '*' || displayValue === '/') {
-                displayValue = '';
-            }
                 if (buttons[i].classList.contains('operand')) {
                     checkDecimal();
                     inputOperand(buttons[i].value);
@@ -61,37 +56,47 @@ function switchNegative() {
     } else {
         displayValue = '-' + displayValue;
     }
-}
+};
 
 function deleteLast() {
     if (displayValue.length === 1) {
-        displayValue = '0';
+        displayValue = '';
     } else {
     displayValue = displayValue.substring(0, displayValue.length -1);
     updateDisplay();
     }
-}
+};
 
 function clear() {
     displayValue = '0';
     numberArray.length = 0;
     operatorArray.length = 0;
-}
+};
 
 function inputOperand(operand) {
-    if (displayValue === '0') {
+    if (displayValue === '-' || displayValue === '+' || 
+            displayValue === '*' || displayValue === '/') {
+                operatorArray.push(displayValue);
+                displayValue = '';
+            }
+    if (displayValue === '0' || displayValue === '') {
         displayValue = operand;
     } else {
         displayValue += operand;
     }
+    updateDisplay();
 };
 
 function inputOperator(operator) {
+    if (displayValue.length >= 1) {
     numberArray.push(displayValue);
-    operatorArray.push(operator);
-    displayValue =  operator;
+    displayValue = operator;
     updateDisplay();
-}
+    } else {
+        displayValue = operator;
+    }
+};
+
 
 function operation() {
     numberArray.push(displayValue)
@@ -121,10 +126,14 @@ function operation() {
         }
         numberArray.length = 0;
     } 
-}
+};
 
 function postOperationArray(currentTotal) {
     operatorArray.splice(0, 1);
     numberArray.splice(0, 2);
     numberArray.unshift(currentTotal);
-}
+};
+
+// prevent multiple operators being used sequentially.
+
+// when an operator is deleted, remove it from the operatorArray.
