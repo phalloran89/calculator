@@ -6,6 +6,26 @@ let secondaryArray = [];
 
 const buttons = document.querySelectorAll('.calc-button');
 
+window.addEventListener('keydown', (e) => {
+    keyboardInput(e);
+});
+
+function keyboardInput(e) {
+    if (e.key >= 0 &&  e.key <= 9 || e.key === '.') {
+        checkDecimal();
+        inputOperand(e.key);
+    } else if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') {
+        inputOperator(e.key);
+    } else if (e.key === '=') {
+        operation();
+    } else if (e.key === 'Backspace') {
+        deleteLast();
+    } else if (e.key === 'Escape') {
+        clear();
+    }
+    updateMainDisplay();
+}
+
 function updateMainDisplay() {
 
     mainDisplayValue = mainDisplayValue.toString();
