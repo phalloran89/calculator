@@ -206,9 +206,13 @@ function operatorSwitch() {
         Number(numberArray[0]) / Number(numberArray[1]);
             postOperationArray(currentTotal);
             break;
-    }
-    mainDisplayValue = currentTotal;
+    }    
+    mainDisplayValue = roundTo(currentTotal, 2);
 };
+
+function roundTo(currentTotal, place) {    
+    return +(Math.round(currentTotal + "e+" + 2) + "e-" + 2);
+}
 
 function postOperationArray(currentTotal) {
    
@@ -216,6 +220,4 @@ function postOperationArray(currentTotal) {
     numberArray.splice(0, 2);
     numberArray.unshift(currentTotal);
 };
-
-// need to add keyboard functionality.
 
