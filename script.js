@@ -16,7 +16,7 @@ function keyboardInput(e) {
         inputOperand(e.key);
     } else if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') {
         inputOperator(e.key);
-    } else if (e.key === '=') {
+    } else if (e.key === '=' || e.key === 'Enter') {
         operation();
     } else if (e.key === 'Backspace') {
         deleteLast();
