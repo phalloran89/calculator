@@ -24,7 +24,7 @@ function keyboardInput(e) {
         clear();
     }
     updateMainDisplay();
-}
+};
 
 function updateMainDisplay() {
 
@@ -165,6 +165,14 @@ function inputOperator(operator) {
 };
 
 function operation() {
+
+    if (mainDisplayValue === '0') {
+        return;
+    }
+
+    if (numberArray.length === 0 || operatorArray === 0 ) {
+        return;
+    }
 
     numberArray.push(mainDisplayValue)
     updateSecondaryDisplay();
