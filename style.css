@@ -17,21 +17,33 @@ body {
     border: solid black 1px;
     padding: 30px 40px;
     border-radius: 8px;
-    height: 520px;
+    height: 560px;
     width: 400px;
     background-color: #e7e8ec;
 }
 
 .display {
+    display: flex;
+    flex-direction: column;
+    background-color: #c5cdd4; 
+    height: 104px;
+    width: 384px;
     border: solid black;
     padding: 5px;
-    text-align: right;
     border-radius: 8px;
-    font-size: 50px;
-    background-color: #c5cdd4;
-    height: 69px;
-    width: 384px;
+    text-align: right;
     word-wrap: break-word;
+}
+
+.secondaryDisplay {
+    border: solid black 1px;
+    height: 32px;
+    font-size: 20px;
+}
+
+.mainDisplay {   
+    border: solid black 1px;     
+    font-size: 50px;
 }
 
 .calc-buttons-row {

@@ -1,24 +1,44 @@
-let displayValue = '0';
+let mainDisplayValue = '0';
+let secondaryDisplayValue = '';
 let numberArray = [];
 let operatorArray = [];
+let secondaryArray = [];
 
 const buttons = document.querySelectorAll('.calc-button');
 
-function updateDisplay() {
+function updateMainDisplay() {
 
-    displayValue = displayValue.toString();
-    const display = document.querySelector('.display');
+    mainDisplayValue = mainDisplayValue.toString();
+    const mainDisplay = document.querySelector('.mainDisplay');
 
-    if (displayValue.length > 13) {
-        display.style = "font-size: 20px";
-        display.textContent = displayValue;
+    if (mainDisplayValue.length > 13) {
+        mainDisplay.style = "font-size: 20px";
+        mainDisplay.textContent = mainDisplayValue;
     } else {
-        display.style = "font-size: 50px";
-        display.textContent = displayValue;
+        mainDisplay.style = "font-size: 50px";
+        mainDisplay.textContent = mainDisplayValue;
     }
 };
 
-updateDisplay();
+updateMainDisplay();
+
+function updateSecondaryDisplay() {
+
+    const secondaryDisplay = document.querySelector('.secondaryDisplay');
+    let l = numberArray.length;
+
+        for (i = 0; i < l; i++) {
+            secondaryArray.push(numberArray[i], operatorArray[i]);
+        }
+        secondaryArray.push(...numberArray.slice(l),...operatorArray.slice(l));
+
+        if (secondaryArray.length > 1) {
+            secondaryDisplayValue = secondaryArray.join(' ') + `=`;
+        }
+    secondaryDisplay.textContent = secondaryDisplayValue;
+};
+
+updateSecondaryDisplay();
 
 function buttonClick() {
 
@@ -30,7 +50,7 @@ function buttonClick() {
 };
 
 function buttonsEventListener([i]) {
-    
+
     if (buttons[i].classList.contains('operand')) {
         checkDecimal();
         inputOperand(buttons[i].value);
@@ -45,14 +65,14 @@ function buttonsEventListener([i]) {
     } else if (buttons[i].classList.contains('negative')) {
         switchNegative();
     }
-    updateDisplay();
+    updateMainDisplay();
 };
 
 buttonClick();
 
 function checkDecimal() {
 
-    if (displayValue.toString().includes('.')) {
+    if (mainDisplayValue.toString().includes('.')) {
         document.getElementById('decimal').value = '';
     } else {
         document.getElementById('decimal').value = '.';
@@ -61,68 +81,72 @@ function checkDecimal() {
 
 function switchNegative() {
 
-    if (displayValue.charAt(0) === '-') {
-        displayValue = displayValue.substring(1);
+    if (mainDisplayValue.charAt(0) === '-') {
+        mainDisplayValue = mainDisplayValue.substring(1);
     } else {
-        displayValue = '-' + displayValue;
+        mainDisplayValue = '-' + mainDisplayValue;
     }
 };
 
 function deleteLast() {
 
-    if (displayValue.length === 1) {
-        displayValue = '';
+    if (mainDisplayValue.length === 1) {
+        mainDisplayValue = '';
     } else {
-        displayValue = displayValue.substring(0, displayValue.length -1);
+        mainDisplayValue = 
+        mainDisplayValue.substring(0, mainDisplayValue.length -1);
     }
 };
 
 function clear() {
 
-    displayValue = '0';
+    mainDisplayValue = '0';
+    secondaryDisplayValue = '';
     numberArray.length = 0;
     operatorArray.length = 0;
 };
 
-function checkDisplayValue(displayValue) {
+function checkMainDisplayValue(mainDisplayValue) {
 
-    if (displayValue === '-' || displayValue === '+' || 
-        displayValue === '*' || displayValue === '/') {
+    if (mainDisplayValue === '-' || mainDisplayValue === '+' || 
+        mainDisplayValue === '*' || mainDisplayValue === '/') {
             return true;
         }
 };
 
 function inputOperand(operand) {
 
-    if (checkDisplayValue(displayValue) == true) {
-        operatorArray.push(displayValue);
-        displayValue = '';
+    if (checkMainDisplayValue(mainDisplayValue) == true) {
+        operatorArray.push(mainDisplayValue);
+        mainDisplayValue = '';
     }
             
-    if (displayValue === '0' || displayValue === '') {
-        displayValue = operand;
+    if (mainDisplayValue === '0' || mainDisplayValue === '') {
+        mainDisplayValue = operand;
     } else {
-        displayValue += operand;
+        mainDisplayValue += operand;
     }
 };
 
 function inputOperator(operator) {
 
-    if (checkDisplayValue(displayValue) == true) {
-        displayValue = operator;
+    if (checkMainDisplayValue(mainDisplayValue) == true) {
+        mainDisplayValue = operator;
     }
     
-    if (displayValue.length >= 1 ) {
-        numberArray.push(displayValue);
-        displayValue = operator;
+    if (mainDisplayValue.length >= 1 ) {
+        numberArray.push(mainDisplayValue);
+        mainDisplayValue = operator;
     } else {
-        displayValue = operator;
+        mainDisplayValue = operator;
     }
 };
 
 function operation() {
 
-    numberArray.push(displayValue)
+    numberArray.push(mainDisplayValue)
+    updateSecondaryDisplay();
+    secondaryArray.length = 0;
     let currentTotal = 0;
 
     if (numberArray.length > 1) {
@@ -130,7 +154,7 @@ function operation() {
             operatorSwitch();            
         }
         numberArray.length = 0;
-    } 
+    }
 };
 
 function operatorSwitch() {
@@ -153,14 +177,15 @@ function operatorSwitch() {
             postOperationArray(currentTotal);
             break;
     }
-    displayValue = currentTotal;
+    mainDisplayValue = currentTotal;
 };
 
 function postOperationArray(currentTotal) {
-    
+   
     operatorArray.splice(0, 1);
     numberArray.splice(0, 2);
     numberArray.unshift(currentTotal);
 };
 
 // need to add keyboard functionality.
+
