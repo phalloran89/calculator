@@ -11,7 +11,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 function keyboardInput(e) {
-    if (e.key >= 0 &&  e.key <= 9 || e.key === '.') {
+    if (e.key >= 0 && e.key <= 9 || e.key >= 96 && e.key <= 105 || e.key === '.') {
         checkDecimal();
         inputOperand(e.key);
     } else if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') {
