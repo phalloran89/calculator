@@ -123,19 +123,19 @@ function operation() {
             switch(operatorArray[0]) {
                 case '-': currentTotal = 
                 Number(numberArray[0]) - Number(numberArray[1]);
-                    postOperationArray();
+                    postOperationArray(currentTotal);
                     break;
                 case '+': currentTotal = 
                 Number(numberArray[0]) + Number(numberArray[1]);
-                    postOperationArray();
+                    postOperationArray(currentTotal);
                     break;
                 case '*': currentTotal = 
                 Number(numberArray[0]) * Number(numberArray[1]);
-                    postOperationArray();
+                    postOperationArray(currentTotal);
                     break;
                 case '/': currentTotal = 
                 Number(numberArray[0]) / Number(numberArray[1]);
-                    postOperationArray();
+                    postOperationArray(currentTotal);
                     break;
             }
             displayValue = currentTotal;
