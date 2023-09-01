@@ -8,6 +8,7 @@ function updateDisplay() {
 
     displayValue = displayValue.toString();
     const display = document.querySelector('.display');
+
     if (displayValue.length > 13) {
         display.style = "font-size: 20px";
         display.textContent = displayValue;
@@ -23,23 +24,28 @@ function buttonClick() {
 
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
-                if (buttons[i].classList.contains('operand')) {
-                    checkDecimal();
-                    inputOperand(buttons[i].value);
-                } else if (buttons[i].classList.contains('operator')) {
-                    inputOperator(buttons[i].value);
-                } else if (buttons[i].classList.contains('equals')) {
-                    operation();
-                } else if (buttons[i].classList.contains('clear')) {
-                    clear();
-                } else if (buttons[i].classList.contains('delete')) {
-                    deleteLast();
-                } else if (buttons[i].classList.contains('negative')) {
-                    switchNegative();
-                }
-                updateDisplay();
+            buttonsEventListener([i]);
         });
     }
+};
+
+function buttonsEventListener([i]) {
+    
+    if (buttons[i].classList.contains('operand')) {
+        checkDecimal();
+        inputOperand(buttons[i].value);
+    } else if (buttons[i].classList.contains('operator')) {
+        inputOperator(buttons[i].value);
+    } else if (buttons[i].classList.contains('equals')) {
+        operation();
+    } else if (buttons[i].classList.contains('clear')) {
+        clear();
+    } else if (buttons[i].classList.contains('delete')) {
+        deleteLast();
+    } else if (buttons[i].classList.contains('negative')) {
+        switchNegative();
+    }
+    updateDisplay();
 };
 
 buttonClick();
@@ -67,7 +73,7 @@ function deleteLast() {
     if (displayValue.length === 1) {
         displayValue = '';
     } else {
-    displayValue = displayValue.substring(0, displayValue.length -1);
+        displayValue = displayValue.substring(0, displayValue.length -1);
     }
 };
 
@@ -91,7 +97,7 @@ function inputOperand(operand) {
     if (checkDisplayValue(displayValue) == true) {
         operatorArray.push(displayValue);
         displayValue = '';
-    };
+    }
             
     if (displayValue === '0' || displayValue === '') {
         displayValue = operand;
@@ -118,30 +124,36 @@ function operation() {
 
     numberArray.push(displayValue)
     let currentTotal = 0;
+
     if (numberArray.length > 1) {
         for (let i = numberArray.length; i > 1; i--) {
-            switch(operatorArray[0]) {
-                case '-': currentTotal = 
-                Number(numberArray[0]) - Number(numberArray[1]);
-                    postOperationArray(currentTotal);
-                    break;
-                case '+': currentTotal = 
-                Number(numberArray[0]) + Number(numberArray[1]);
-                    postOperationArray(currentTotal);
-                    break;
-                case '*': currentTotal = 
-                Number(numberArray[0]) * Number(numberArray[1]);
-                    postOperationArray(currentTotal);
-                    break;
-                case '/': currentTotal = 
-                Number(numberArray[0]) / Number(numberArray[1]);
-                    postOperationArray(currentTotal);
-                    break;
-            }
-            displayValue = currentTotal;
+            operatorSwitch();            
         }
         numberArray.length = 0;
     } 
+};
+
+function operatorSwitch() {
+
+    switch(operatorArray[0]) {
+        case '-': currentTotal = 
+        Number(numberArray[0]) - Number(numberArray[1]);
+            postOperationArray(currentTotal);
+            break;
+        case '+': currentTotal = 
+        Number(numberArray[0]) + Number(numberArray[1]);
+            postOperationArray(currentTotal);
+            break;
+        case '*': currentTotal = 
+        Number(numberArray[0]) * Number(numberArray[1]);
+            postOperationArray(currentTotal);
+            break;
+        case '/': currentTotal = 
+        Number(numberArray[0]) / Number(numberArray[1]);
+            postOperationArray(currentTotal);
+            break;
+    }
+    displayValue = currentTotal;
 };
 
 function postOperationArray(currentTotal) {
