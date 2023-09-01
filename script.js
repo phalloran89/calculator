@@ -5,6 +5,7 @@ let operatorArray = [];
 const buttons = document.querySelectorAll('.calc-button');
 
 function updateDisplay() {
+
     displayValue = displayValue.toString();
     const display = document.querySelector('.display');
     if (displayValue.length > 13) {
@@ -19,6 +20,7 @@ function updateDisplay() {
 updateDisplay();
 
 function buttonClick() {
+
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
                 if (buttons[i].classList.contains('operand')) {
@@ -43,6 +45,7 @@ function buttonClick() {
 buttonClick();
 
 function checkDecimal() {
+
     if (displayValue.toString().includes('.')) {
         document.getElementById('decimal').value = '';
     } else {
@@ -51,6 +54,7 @@ function checkDecimal() {
 };
 
 function switchNegative() {
+
     if (displayValue.charAt(0) === '-') {
         displayValue = displayValue.substring(1);
     } else {
@@ -59,6 +63,7 @@ function switchNegative() {
 };
 
 function deleteLast() {
+
     if (displayValue.length === 1) {
         displayValue = '';
     } else {
@@ -67,17 +72,27 @@ function deleteLast() {
 };
 
 function clear() {
+
     displayValue = '0';
     numberArray.length = 0;
     operatorArray.length = 0;
 };
 
-function inputOperand(operand) {
+function checkDisplayValue(displayValue) {
+
     if (displayValue === '-' || displayValue === '+' || 
-            displayValue === '*' || displayValue === '/') {
-                operatorArray.push(displayValue);
-                displayValue = '';
-            }
+        displayValue === '*' || displayValue === '/') {
+            return true;
+        }
+};
+
+function inputOperand(operand) {
+
+    if (checkDisplayValue(displayValue) == true) {
+        operatorArray.push(displayValue);
+        displayValue = '';
+    };
+            
     if (displayValue === '0' || displayValue === '') {
         displayValue = operand;
     } else {
@@ -86,18 +101,21 @@ function inputOperand(operand) {
 };
 
 function inputOperator(operator) {
-    if (displayValue === '-' || displayValue === '+' || 
-            displayValue === '*' || displayValue === '/') {
-                displayValue = operator;
-            } else if (displayValue.length >= 1 ) {
-    numberArray.push(displayValue);
-    displayValue = operator;
+
+    if (checkDisplayValue(displayValue) == true) {
+        displayValue = operator;
+    }
+    
+    if (displayValue.length >= 1 ) {
+        numberArray.push(displayValue);
+        displayValue = operator;
     } else {
         displayValue = operator;
     }
 };
 
 function operation() {
+
     numberArray.push(displayValue)
     let currentTotal = 0;
     if (numberArray.length > 1) {
@@ -127,9 +145,10 @@ function operation() {
 };
 
 function postOperationArray(currentTotal) {
+    
     operatorArray.splice(0, 1);
     numberArray.splice(0, 2);
     numberArray.unshift(currentTotal);
 };
 
-// prevent multiple operators being used sequentially.
+// need to add keyboard functionality.
