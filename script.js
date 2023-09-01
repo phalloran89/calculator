@@ -102,8 +102,10 @@ function clear() {
 
     mainDisplayValue = '0';
     secondaryDisplayValue = '';
+    secondaryArray.length = 0;
     numberArray.length = 0;
     operatorArray.length = 0;
+    updateSecondaryDisplay();
 };
 
 function checkMainDisplayValue(mainDisplayValue) {
